@@ -1,0 +1,99 @@
+﻿<Window x:Name="Window_TrainerProcess" x:Class="KeyboardTrainer.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:KeyboardTrainer" 
+        mc:Ignorable="d" Title="Keyboard Trainer" Height="526" Width="852" MinWidth="500">
+    <Grid x:Name="Grid_MainLayout">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="128*"/>
+            <RowDefinition Height="127*"/>
+        </Grid.RowDefinitions>
+        <!--#region Keyboard.-->
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="10,10,10,10" MaxHeight="450" Background="#FF202123" Grid.Row="1">
+            <Grid x:Name="Grid_BoardLayout">
+                <!-- Keyboard layout. -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Button Style. -->
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="2" />
+                        <Setter Property="Foreground" Value="#FFF1ECEC" />
+                        <Setter Property="Background" Value="#000000" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
+                <!-- First row of buttons. -->
+                <Button Content="1" Margin="2" Grid.Row="0" Grid.Column="0"/>
+                <Button Content="2" Margin="2" Grid.Row="0" Grid.Column="1"/>
+                <Button Content="3" Margin="2" Grid.Row="0" Grid.Column="2"/>
+                <Button Content="4" Margin="2" Grid.Row="0" Grid.Column="3"/>
+                <Button Content="5" Margin="2" Grid.Row="0" Grid.Column="4"/>
+                <Button Content="6" Margin="2" Grid.Row="0" Grid.Column="5"/>
+                <Button Content="7" Margin="2" Grid.Row="0" Grid.Column="6"/>
+                <Button Content="8" Margin="2" Grid.Row="0" Grid.Column="7"/>
+                <Button Content="9" Margin="2" Grid.Row="0" Grid.Column="8"/>
+                <Button Content="0" Margin="2" Grid.Row="0" Grid.Column="9"/>
+                <!-- Second row of buttons. -->
+                <Button Content="Q" Margin="2" Grid.Row="1" Grid.Column="0"/>
+                <Button Content="W" Margin="2" Grid.Row="1" Grid.Column="1"/>
+                <Button Content="E" Margin="2" Grid.Row="1" Grid.Column="2"/>
+                <Button Content="R" Margin="2" Grid.Row="1" Grid.Column="3"/>
+                <Button Content="T" Margin="2" Grid.Row="1" Grid.Column="4"/>
+                <Button Content="Y" Margin="2" Grid.Row="1" Grid.Column="5"/>
+                <Button Content="U" Margin="2" Grid.Row="1" Grid.Column="6"/>
+                <Button Content="I" Margin="2" Grid.Row="1" Grid.Column="7"/>
+                <Button Content="O" Margin="2" Grid.Row="1" Grid.Column="8"/>
+                <Button Content="P" Margin="2" Grid.Row="1" Grid.Column="9"/>
+                <!-- Third row of buttons. -->
+                <Button Content="A" Margin="2" Grid.Row="2" Grid.Column="0"/>
+                <Button Content="S" Margin="2" Grid.Row="2" Grid.Column="1"/>
+                <Button Content="D" Margin="2" Grid.Row="2" Grid.Column="2"/>
+                <Button Content="F" Margin="2" Grid.Row="2" Grid.Column="3"/>
+                <Button Content="G" Margin="2" Grid.Row="2" Grid.Column="4"/>
+                <Button Content="H" Margin="2" Grid.Row="2" Grid.Column="5"/>
+                <Button Content="J" Margin="2" Grid.Row="2" Grid.Column="6"/>
+                <Button Content="K" Margin="2" Grid.Row="2" Grid.Column="7"/>
+                <Button Content="L" Margin="2" Grid.Row="2" Grid.Column="8"/>
+                <!-- Fourth row of buttons. -->
+                <Button Content="Shift" Margin="2" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <Button Content="Z" Margin="2" Grid.Row="3" Grid.Column="2"/>
+                <Button Content="X" Margin="2" Grid.Row="3" Grid.Column="3"/>
+                <Button Content="C" Margin="2" Grid.Row="3" Grid.Column="4"/>
+                <Button Content="V" Margin="2" Grid.Row="3" Grid.Column="5"/>
+                <Button Content="B" Margin="2" Grid.Row="3" Grid.Column="6"/>
+                <Button Content="N" Margin="2" Grid.Row="3" Grid.Column="7"/>
+                <Button Content="M" Margin="2" Grid.Row="3" Grid.Column="8"/>
+                <!-- Fifth row of buttons. -->
+                <Button Content="Space" Margin="2" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="10"/>
+            </Grid>
+        </Border>
+        <!--#endregion-->
+    </Grid>
+</Window>
