@@ -82,7 +82,7 @@
                 <Button Content="K" Margin="2" Grid.Row="2" Grid.Column="7"/>
                 <Button Content="L" Margin="2" Grid.Row="2" Grid.Column="8"/>
                 <!-- Fourth row of buttons. -->
-                <Button Content="Shift" Margin="2" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <Button Content="LeftShift" Margin="2" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
                 <Button Content="Z" Margin="2" Grid.Row="3" Grid.Column="2"/>
                 <Button Content="X" Margin="2" Grid.Row="3" Grid.Column="3"/>
                 <Button Content="C" Margin="2" Grid.Row="3" Grid.Column="4"/>
@@ -91,8 +91,8 @@
                 <Button Content="N" Margin="2" Grid.Row="3" Grid.Column="7"/>
                 <Button Content="M" Margin="2" Grid.Row="3" Grid.Column="8"/>
                 <!-- Fifth row of buttons. -->
+                <Button Content="Return" Margin="2,3,2,3" Grid.Row="2" Grid.Column="9" Grid.RowSpan="2"/>
                 <Button Content="Space" Margin="2" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="10"/>
-                <Button Content="Enter" Margin="2,3,2,3" Grid.Row="2" Grid.Column="9" Grid.RowSpan="2"/>
             </Grid>
         </Border>
         <!--#endregion-->

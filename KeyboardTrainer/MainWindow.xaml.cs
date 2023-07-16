@@ -24,30 +24,40 @@ namespace KeyboardTrainer
 
         private void Window_HighlightButton_KeyDown(object sender, KeyEventArgs e)
         {
-            char pressed_key = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+            string pressed_key = e.Key.ToString();
 
             Button button = FindButton(pressed_key);
-
-            if (button != null)
-                button.Background = Brushes.Orange;
         }
 
         private void Window_WringOut_KeyUp(object sender, KeyEventArgs e)
         {
-            char pressed_key = (char)KeyInterop.VirtualKeyFromKey(e.Key);
-
+            string pressed_key = e.Key.ToString();
             Button button = FindButton(pressed_key);
-
-            if (button != null)
+            
+            if (button != null) 
                 button.Background = Brushes.Black;
         }
 
-        private Button FindButton(char key)
+        private Button FindButton(string key)
         {
-            foreach (var item in Grid_BoardLayout.Children)
+            foreach (Button item in Grid_BoardLayout.Children)
             {
-                if (item is Button found && found.Content is string content && content == key.ToString())
-                    return found;
+                if ($"D{item.Content}" == key)
+                {
+                    item.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#01aa49"));
+                    return item;
+                }
+                else if (item.Content.ToString() == key)
+                {
+                    if (item.Content.ToString() == "Space" || item.Content.ToString() == "LeftShift" || item.Content.ToString() == "Return")
+                    {
+                        item.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#a823f6"));
+                        return item;
+                    }
+
+                    item.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#f78900"));
+                    return item;
+                }
             }
             return null;
         }
