@@ -21,5 +21,35 @@ namespace KeyboardTrainer
         {
             InitializeComponent();
         }
+
+        private void Window_HighlightButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            char pressed_key = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            Button button = FindButton(pressed_key);
+
+            if (button != null)
+                button.Background = Brushes.Orange;
+        }
+
+        private void Window_WringOut_KeyUp(object sender, KeyEventArgs e)
+        {
+            char pressed_key = (char)KeyInterop.VirtualKeyFromKey(e.Key);
+
+            Button button = FindButton(pressed_key);
+
+            if (button != null)
+                button.Background = Brushes.Black;
+        }
+
+        private Button FindButton(char key)
+        {
+            foreach (var item in Grid_BoardLayout.Children)
+            {
+                if (item is Button found && found.Content is string content && content == key.ToString())
+                    return found;
+            }
+            return null;
+        }
     }
 }

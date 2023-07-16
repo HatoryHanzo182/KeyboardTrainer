@@ -1,7 +1,7 @@
 ﻿<Window x:Name="Window_TrainerProcess" x:Class="KeyboardTrainer.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:KeyboardTrainer" 
-        mc:Ignorable="d" Title="Keyboard Trainer" Height="526" Width="852" MinWidth="500">
+        mc:Ignorable="d" Title="Keyboard Trainer" Height="526" Width="852" MinWidth="500" KeyDown="Window_HighlightButton_KeyDown" KeyUp="Window_WringOut_KeyUp">
     <Grid x:Name="Grid_MainLayout">
         <Grid.RowDefinitions>
             <RowDefinition Height="128*"/>
@@ -92,6 +92,7 @@
                 <Button Content="M" Margin="2" Grid.Row="3" Grid.Column="8"/>
                 <!-- Fifth row of buttons. -->
                 <Button Content="Space" Margin="2" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="10"/>
+                <Button Content="Enter" Margin="2,3,2,3" Grid.Row="2" Grid.Column="9" Grid.RowSpan="2"/>
             </Grid>
         </Border>
         <!--#endregion-->
