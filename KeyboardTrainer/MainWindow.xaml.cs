@@ -24,15 +24,12 @@ namespace KeyboardTrainer
 
         private void Window_HighlightButton_KeyDown(object sender, KeyEventArgs e)
         {
-            string pressed_key = e.Key.ToString();
-
-            Button button = FindButton(pressed_key);
+            FindButton(e.Key.ToString());
         }
 
         private void Window_WringOut_KeyUp(object sender, KeyEventArgs e)
         {
-            string pressed_key = e.Key.ToString();
-            Button button = FindButton(pressed_key);
+            Button button = FindButton(e.Key.ToString());
             
             if (button != null) 
                 button.Background = Brushes.Black;

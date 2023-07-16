@@ -5,13 +5,20 @@
     <Window.Background>
         <ImageBrush ImageSource="/wallhaven.png" Stretch="Fill"/>
     </Window.Background>
-    <Grid x:Name="Grid_MainLayout">
+    <Grid x:Name="Grid_MainLayout" MinHeight="500">
         <Grid.RowDefinitions>
-            <RowDefinition Height="128*"/>
-            <RowDefinition Height="127*"/>
+            <RowDefinition Height="109*"/>
+            <RowDefinition Height="21*"/>
+            <RowDefinition Height="125*"/>
         </Grid.RowDefinitions>
+        <!--#region Training text.-->
+        <Border x:Name="Border_TrainingText" BorderBrush="Black" BorderThickness="1" Margin="10,2,10,5" Grid.Row="1" CornerRadius="5" Background="#7F787878">
+            <TextBlock x:Name="TextBlock_TrainingText" TextWrapping="Wrap" Text="TextBlock" FontSize="24" FontWeight="Bold" Foreground="White" Margin="9,1,9,2" 
+                       VerticalAlignment="Center"/>
+        </Border>
+        <!--#endregion-->
         <!--#region Keyboard.-->
-        <Border x:Name="Border_Keyboard" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="10,10,10,10" MaxHeight="450" Grid.Row="1">
+        <Border x:Name="Border_Keyboard" BorderBrush="Black" BorderThickness="2" CornerRadius="5" Margin="10,3,10,10" MaxHeight="450" Grid.Row="2">
             <Border.Background>
                 <ImageBrush ImageSource="/Img/wallhaven.png" Stretch="Fill"/>
             </Border.Background>
