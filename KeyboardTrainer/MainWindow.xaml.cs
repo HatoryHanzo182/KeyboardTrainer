@@ -17,13 +17,30 @@ namespace KeyboardTrainer
 {
     public partial class MainWindow : Window
     {
+        KeyboardTrainer.Services.TextGenerator _gtext;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            _gtext = new KeyboardTrainer.Services.TextGenerator();
+        }
+
+        private void Window_TrainerProcess_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock_TrainingText.Text = new string(_gtext._text.ToArray());
         }
 
         private void Window_HighlightButton_KeyDown(object sender, KeyEventArgs e)
         {
+            if ((e.Key.ToString() == _gtext._text.Peek().ToString() && e.KeyboardDevice.Modifiers == ModifierKeys.Shift) ||
+                (char.ToLower(e.Key.ToString()[0]).ToString() == _gtext._text.Peek().ToString() && e.KeyboardDevice.Modifiers == ModifierKeys.None) || 
+                e.Key.ToString() == $"D{_gtext._text.Peek().ToString()}" || (_gtext._text.Peek().ToString() == " " && e.Key.ToString() == "Space"))
+            {
+                _gtext._text.Dequeue();
+                _gtext._text.Enqueue(_gtext.Genirate());
+                TextBlock_TrainingText.Text = new string(_gtext._text.ToArray());
+            }
             FindButton(e.Key.ToString());
         }
 
