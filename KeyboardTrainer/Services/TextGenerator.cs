@@ -14,7 +14,7 @@ namespace KeyboardTrainer.Services
 
         public TextGenerator()
         {
-            for (int i = 0; i < 80; i++) 
+            for (int i = 0; i < 120; i++) 
                 _text.Enqueue(Genirate());
         }
 
