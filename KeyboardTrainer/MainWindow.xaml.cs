@@ -142,6 +142,8 @@ namespace KeyboardTrainer
 
                 _timer.Start();
             }
+            else
+                this.Close();
             WriteResult();
         }
 
