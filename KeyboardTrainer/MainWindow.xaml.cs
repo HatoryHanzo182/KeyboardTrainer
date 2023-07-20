@@ -28,14 +28,21 @@ namespace KeyboardTrainer
             InitializeComponent();
 
             _gtext = new KeyboardTrainer.Services.TextGenerator();
+        }
+
+        private void Window_TrainerProcess_Loaded(object sender, RoutedEventArgs e) 
+        { 
+            TextBlock_TrainingText.Text = new string(_gtext._text.ToArray());
+
+            StartTimer();
+        }
+
+        #region Timer.
+        private void StartTimer()
+        {
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += Timer_Tick;
             _timer.Start();
-        }
-
-        private void Window_TrainerProcess_Loaded(object sender, RoutedEventArgs e)
-        {
-            TextBlock_TrainingText.Text = new string(_gtext._text.ToArray());
         }
 
         private void Timer_Tick(object send, EventArgs e)
@@ -44,16 +51,25 @@ namespace KeyboardTrainer
             {
                 _current_time--;
 
-                UpdateTimeLabel();
+                UpdateTimeFormat();
             }
             else
                 _timer.Stop();
         }
 
+        private void UpdateTimeFormat()
+        {
+            TimeSpan time_span = TimeSpan.FromSeconds(_current_time);
+
+            Label_Timer.Content = string.Format("{0:D2}:{1:D2}", time_span.Minutes, time_span.Seconds);
+        }
+        #endregion
+
+        #region Training Events.
         private void Window_HighlightButton_KeyDown(object sender, KeyEventArgs e)
         {
             if ((e.Key.ToString() == _gtext._text.Peek().ToString() && e.KeyboardDevice.Modifiers == ModifierKeys.Shift) ||
-                (char.ToLower(e.Key.ToString()[0]).ToString() == _gtext._text.Peek().ToString() && e.KeyboardDevice.Modifiers == ModifierKeys.None) || 
+                (char.ToLower(e.Key.ToString()[0]).ToString() == _gtext._text.Peek().ToString() && e.KeyboardDevice.Modifiers == ModifierKeys.None) ||
                 e.Key.ToString() == $"D{_gtext._text.Peek()}" || (_gtext._text.Peek().ToString() == " " && e.Key.ToString() == "Space"))
             {
                 _gtext._text.Dequeue();
@@ -66,18 +82,13 @@ namespace KeyboardTrainer
         private void Window_WringOut_KeyUp(object sender, KeyEventArgs e)
         {
             Button button = FindButton(e.Key.ToString());
-            
-            if (button != null) 
+
+            if (button != null)
                 button.Background = Brushes.Black;
         }
+        #endregion
 
-        private void UpdateTimeLabel()
-        {
-            TimeSpan time_span = TimeSpan.FromSeconds(_current_time);
-
-            Label_Timer.Content = string.Format("{0:D2}:{1:D2}", time_span.Minutes, time_span.Seconds);
-        }
-
+        #region Service methods.
         private Button FindButton(string key)
         {
             foreach (Button item in Grid_BoardLayout.Children)
@@ -101,5 +112,6 @@ namespace KeyboardTrainer
             }
             return null;
         }
+        #endregion
     }
 }
