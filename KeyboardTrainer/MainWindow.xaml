@@ -12,10 +12,12 @@
             <RowDefinition Height="21*"/>
             <RowDefinition Height="125*"/>
         </Grid.RowDefinitions>
+        <!--#region Timer.-->
+        <Label x:Name="Label_Timer" Content="05:00" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" FontSize="80"/>
+        <!--#endregion-->
         <!--#region Training text.-->
         <Border x:Name="Border_TrainingText" BorderBrush="Black" BorderThickness="1" Margin="10,2,10,5" Grid.Row="1" CornerRadius="5" Background="#7F787878">
-            <TextBlock x:Name="TextBlock_TrainingText" TextWrapping="NoWrap" Text="TextBlock" FontSize="24" FontWeight="Bold"  
-                       Foreground="White" Margin="9,0,9,1"/>
+            <TextBlock x:Name="TextBlock_TrainingText" TextWrapping="NoWrap" Text="TextBlock" FontSize="24" FontWeight="Bold" Foreground="White" Margin="9,0,9,1"/>
         </Border>
         <!--#endregion-->
         <!--#region Keyboard.-->
@@ -24,6 +26,25 @@
                 <ImageBrush ImageSource="/Img/wallhaven.png" Stretch="Fill"/>
             </Border.Background>
             <Grid x:Name="Grid_BoardLayout" Opacity="0.7">
+                <!-- Button Style. -->
+                <Grid.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="2" />
+                        <Setter Property="Foreground" Value="#FFF1ECEC" />
+                        <Setter Property="Background" Value="#000000" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
+                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
                 <!-- Keyboard layout. -->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -44,25 +65,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <!-- Button Style. -->
-                <Grid.Resources>
-                    <Style TargetType="Button">
-                        <Setter Property="Margin" Value="2" />
-                        <Setter Property="Foreground" Value="#FFF1ECEC" />
-                        <Setter Property="Background" Value="#000000" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
-                                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5">
-                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Grid.Resources>
                 <!-- First row of buttons. -->
                 <Button Content="1" Margin="2" Grid.Row="0" Grid.Column="0"/>
                 <Button Content="2" Margin="2" Grid.Row="0" Grid.Column="1"/>
