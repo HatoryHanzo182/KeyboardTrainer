@@ -48,8 +48,6 @@ namespace KeyboardTrainer
             StartTimer();
         }
 
-        private void GetResults() { _results = JsonSerializer.Deserialize<TrainerData>(System.IO.File.ReadAllText("trainer.json")); }
-
         #region Timer.
         private void StartTimer()
         {
@@ -108,6 +106,8 @@ namespace KeyboardTrainer
         #endregion
 
         #region Service methods.
+        private void GetResults() { _results = JsonSerializer.Deserialize<TrainerData>(System.IO.File.ReadAllText("trainer.json")); }
+
         private Button FindButton(string key)
         {
             foreach (Button item in Grid_BoardLayout.Children)
@@ -138,6 +138,10 @@ namespace KeyboardTrainer
 
             if(MessageBox.Show($"{_trainer.Characters} characters per {_trainer.AmountTime} time.\nStart over??", "Result", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
+                WriteResult();
+
+                _trainer.Characters = 0;
+                _trainer.AmountTime = String.Empty;
                 _current_time = 1 * 60;
 
                 _timer.Start();
@@ -147,7 +151,11 @@ namespace KeyboardTrainer
             WriteResult();
         }
 
-        private void WriteResult() => File.WriteAllText(System.IO.Path.Combine(Environment.CurrentDirectory, "trainer.json"), JsonSerializer.Serialize(_trainer));
+        private void WriteResult()
+        {
+            if (_trainer.Characters > _results.Characters)
+                File.WriteAllText(System.IO.Path.Combine(Environment.CurrentDirectory, "trainer.json"), JsonSerializer.Serialize(_trainer));
+        }
         #endregion
 
         private void Window_TrainerProcess_Closing(object sender, System.ComponentModel.CancelEventArgs e)
