@@ -11,11 +11,20 @@ using System.IO;
 
 namespace KeyboardTrainer
 {
+    //*
+    // * Application window "KeyboardTrainer".
+    // * The window displays the text that the user must enter on the keyboard, as well as a timer that counts down the training time.
+    // * The class contains logic to generate random text, handle keystrokes, highlight correctly entered characters,
+    // * count the number of characters, and exercise time. When the training time expires, a modal window opens with
+    // * the results of the training, where the user can save his best result. The class also implements logic to prevent window
+    // * resizing and to update the time format in the timer.
+    //*
+
     public partial class MainWindow : Window
     {
         private KeyboardTrainer.Services.TextGenerator _gtext;
         private DispatcherTimer _timer = new DispatcherTimer();
-        private int _current_time = 1 * 60;
+        private int _current_time = 3 * 60;
         private TrainerData _trainer;
         private TrainerData _results;
         private ResultModalWindow _modal_result;
@@ -146,10 +155,8 @@ namespace KeyboardTrainer
             _modal_result = new ResultModalWindow(_trainer);
             _trainer.AmountTime = $"03:60";
 
-            if(MessageBox.Show($"{_trainer.Characters} characters per {_trainer.AmountTime} time.\nStart over??", "Result", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if(_modal_result.ShowDialog() == true)
             {
-                _modal_result.ShowDialog();
-                
                 WriteResult();
                 GetResults();
 

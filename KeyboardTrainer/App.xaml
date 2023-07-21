@@ -4,6 +4,15 @@
              xmlns:local="clr-namespace:KeyboardTrainer"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- 
+            ╭╮╭━╮      ╭╮           ╭╮ ╭╮
+            ┃┃┃╭╯      ┃┃           ┃┃╭╯╰╮
+            ┃╰╯╯╭━━┳╮ ╭┫╰━┳━━┳━━┳━┳━╯┃╰╮╭╋━┳━━┳┳━╮╭━━┳━╮
+            ┃╭╮┃┃┃━┫┃ ┃┃╭╮┃╭╮┃╭╮┃╭┫╭╮┃ ┃┃┃╭┫╭╮┣┫╭╮┫┃━┫╭╯
+            ┃┃┃╰┫┃━┫╰━╯┃╰╯┃╰╯┃╭╮┃┃┃╰╯┃ ┃╰┫┃┃╭╮┃┃┃┃┃┃━┫┃
+            ╰╯╰━┻━━┻━╮╭┻━━┻━━┻╯╰┻╯╰━━╯ ╰━┻╯╰╯╰┻┻╯╰┻━━┻╯
+                   ╭━╯┃
+                   ╰━━╯
+        -->
     </Application.Resources>
 </Application>

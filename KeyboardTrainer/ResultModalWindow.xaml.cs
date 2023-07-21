@@ -1,20 +1,15 @@
 ﻿using KeyboardTrainer.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace KeyboardTrainer
 {
+    //* 
+    // * Modal window for displaying training results in the "KeyboardTrainer" application.
+    // * The window is used to show the user information about the number of correctly entered
+    // * characters and the time spent on training.
+    // * The class takes TrainerData as a constructor parameter to get the results of the current round of training.
+    //*
+
     public partial class ResultModalWindow : Window
     {
         TrainerData _res_data;
@@ -26,9 +21,11 @@ namespace KeyboardTrainer
             _res_data = res_data;
         }
 
-        private void Window_Result_Loaded(object sender, RoutedEventArgs e)
-        {
-            Label_Result.Content = $"Your result for this round: {_res_data.Characters} symbols in {_res_data.AmountTime} time";
-        }
+        private void Window_Result_Loaded(object sender, RoutedEventArgs e) => 
+            Label_Result.Content = $"Your result for this round: {_res_data.Characters} symbols in {_res_data.AmountTime} time\nDo you want again???";
+
+        private void Button_OK_Click(object sender, RoutedEventArgs e) => this.DialogResult = true;
+
+        private void Button_Cancel_Click(object sender, RoutedEventArgs e) => this.DialogResult = false;
     }
 }
