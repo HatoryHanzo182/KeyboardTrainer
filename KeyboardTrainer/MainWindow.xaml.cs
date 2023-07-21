@@ -15,10 +15,11 @@ namespace KeyboardTrainer
     {
         private KeyboardTrainer.Services.TextGenerator _gtext;
         private DispatcherTimer _timer = new DispatcherTimer();
-        private int _current_time = 3 * 60;
+        private int _current_time = 1 * 60;
         private TrainerData _trainer;
         private TrainerData _results;
-
+        private ResultModalWindow _modal_result;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -142,10 +143,13 @@ namespace KeyboardTrainer
 
         private void End()
         {
+            _modal_result = new ResultModalWindow(_trainer);
             _trainer.AmountTime = $"03:60";
 
             if(MessageBox.Show($"{_trainer.Characters} characters per {_trainer.AmountTime} time.\nStart over??", "Result", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
+                _modal_result.ShowDialog();
+                
                 WriteResult();
                 GetResults();
 
