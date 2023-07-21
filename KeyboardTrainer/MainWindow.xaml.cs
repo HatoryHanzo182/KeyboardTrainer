@@ -1,19 +1,10 @@
 ﻿using KeyboardTrainer.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Text.Json;
 using System.IO;
@@ -24,7 +15,7 @@ namespace KeyboardTrainer
     {
         private KeyboardTrainer.Services.TextGenerator _gtext;
         private DispatcherTimer _timer = new DispatcherTimer();
-        private int _current_time = 1 * 60;
+        private int _current_time = 3 * 60;
         private TrainerData _trainer;
         private TrainerData _results;
 
@@ -38,8 +29,8 @@ namespace KeyboardTrainer
         }
 
         private void Window_TrainerProcess_Loaded(object sender, RoutedEventArgs e) 
-        { 
-            TextBlock_TrainingText.Text = new string(_gtext._text.ToArray());
+        {
+            MarkSelectedCharacter(new string(_gtext._text.ToArray()));
 
             GetResults();
 
@@ -83,14 +74,12 @@ namespace KeyboardTrainer
         #region Training Events.
         private void Window_HighlightButton_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.Key.ToString() == _gtext._text.Peek().ToString() && e.KeyboardDevice.Modifiers == ModifierKeys.Shift) ||
-                (char.ToLower(e.Key.ToString()[0]).ToString() == _gtext._text.Peek().ToString() && e.KeyboardDevice.Modifiers == ModifierKeys.None) ||
-                e.Key.ToString() == $"D{_gtext._text.Peek()}" || (_gtext._text.Peek().ToString() == " " && e.Key.ToString() == "Space"))
+            if (CorrectValue(e))
             {
                 _gtext._text.Dequeue();
                 _gtext._text.Enqueue(_gtext.Genirate());
 
-                TextBlock_TrainingText.Text = new string(_gtext._text.ToArray());
+                MarkSelectedCharacter(new string(_gtext._text.ToArray()));
                 _trainer.Characters += 1;
             }
             FindButton(e.Key.ToString());
@@ -106,8 +95,6 @@ namespace KeyboardTrainer
         #endregion
 
         #region Service methods.
-        private void GetResults() { _results = JsonSerializer.Deserialize<TrainerData>(System.IO.File.ReadAllText("trainer.json")); }
-
         private Button FindButton(string key)
         {
             foreach (Button item in Grid_BoardLayout.Children)
@@ -132,6 +119,27 @@ namespace KeyboardTrainer
             return null;
         }
 
+        private bool CorrectValue(KeyEventArgs e)
+        {
+            if ((e.Key.ToString() == _gtext._text.Peek().ToString() && e.KeyboardDevice.Modifiers == ModifierKeys.Shift) ||
+                (char.ToLower(e.Key.ToString()[0]).ToString() == _gtext._text.Peek().ToString() && e.KeyboardDevice.Modifiers == ModifierKeys.None) ||
+                e.Key.ToString() == $"D{_gtext._text.Peek()}" || (_gtext._text.Peek().ToString() == " " && e.Key.ToString() == "Space"))
+                return true;
+            return false;
+        }
+
+        private void MarkSelectedCharacter(string text)
+        {
+            Run letters = new Run(text.Substring(0, 1));
+
+            TextBlock_TrainingText.Inlines.Clear();
+            letters.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#d60000"));
+            TextBlock_TrainingText.Inlines.Add(letters);
+            letters = new Run(text.Substring(1));
+            letters.Foreground = Brushes.White;
+            TextBlock_TrainingText.Inlines.Add(letters);
+        }
+
         private void End()
         {
             _trainer.AmountTime = $"03:60";
@@ -139,6 +147,7 @@ namespace KeyboardTrainer
             if(MessageBox.Show($"{_trainer.Characters} characters per {_trainer.AmountTime} time.\nStart over??", "Result", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
                 WriteResult();
+                GetResults();
 
                 _trainer.Characters = 0;
                 _trainer.AmountTime = String.Empty;
@@ -156,6 +165,8 @@ namespace KeyboardTrainer
             if (_trainer.Characters > _results.Characters)
                 File.WriteAllText(System.IO.Path.Combine(Environment.CurrentDirectory, "trainer.json"), JsonSerializer.Serialize(_trainer));
         }
+
+        private void GetResults() =>_results = JsonSerializer.Deserialize<TrainerData>(System.IO.File.ReadAllText("trainer.json"));
         #endregion
 
         private void Window_TrainerProcess_Closing(object sender, System.ComponentModel.CancelEventArgs e)
